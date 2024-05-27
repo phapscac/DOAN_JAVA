@@ -4,19 +4,21 @@
  */
 package UI;
 
+import Model.User;
 import javax.swing.JOptionPane;
 
 public class TrangchuUI extends javax.swing.JFrame {
     String role = null;
     int dn=0;
+    String ten = null;
+    User user = null;
     /**S
      * Creates new form TrangchuUI
      */
     public TrangchuUI() {
-        initComponents();
-        //internal1.setContentPane(new TK_USERUI().getContentPane());
+       initComponents();
+       xulytrangchu();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,7 +31,7 @@ public class TrangchuUI extends javax.swing.JFrame {
         desktopPain = new javax.swing.JDesktopPane();
         internal1 = new javax.swing.JInternalFrame();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jl1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
@@ -40,6 +42,7 @@ public class TrangchuUI extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         MEMUDN = new javax.swing.JMenuItem();
         MENUDK = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
@@ -50,11 +53,10 @@ public class TrangchuUI extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/download.png"))); // NOI18N
 
-        jLabel5.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel5.setText("ĐĂNG NHẬP ĐÊ TIẾP TỤC");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jl1.setForeground(new java.awt.Color(0, 153, 255));
+        jl1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                jl1MouseClicked(evt);
             }
         });
 
@@ -74,7 +76,7 @@ public class TrangchuUI extends javax.swing.JFrame {
                         .addGap(145, 145, 145))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, internal1Layout.createSequentialGroup()
                         .addGroup(internal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
+                            .addComponent(jl1)
                             .addComponent(jLabel1))
                         .addGap(163, 163, 163))))
         );
@@ -86,8 +88,8 @@ public class TrangchuUI extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addComponent(jLabel1)
                 .addGap(109, 109, 109)
-                .addComponent(jLabel5)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addComponent(jl1)
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         desktopPain.setLayer(internal1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -170,6 +172,14 @@ public class TrangchuUI extends javax.swing.JFrame {
         });
         jMenu3.add(MENUDK);
 
+        jMenuItem2.setText("Xem tài khoản");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
         jMenuBar1.add(jMenu3);
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/bar-chart.png"))); // NOI18N
@@ -178,6 +188,11 @@ public class TrangchuUI extends javax.swing.JFrame {
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/settings.png"))); // NOI18N
         jMenu4.setText("Cài đặt");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -195,15 +210,15 @@ public class TrangchuUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+     void xulytrangchu(){
+        tc t = new tc();
+        t.ten = ten;
+        internal1.setContentPane(t.getContentPane());
+        t.xuly();   
+     }
     private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
-        TK_USERUI  tk = new TK_USERUI();
-        tk.show();// TODO add your handling code here:
+       
     }//GEN-LAST:event_jMenu6MouseClicked
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        internal1.setContentPane(new TK_USERUI().getContentPane());    
-    }//GEN-LAST:event_jLabel5MouseClicked
 
     private void MEMUDNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MEMUDNMouseClicked
           internal1.setContentPane(new TK_USERUI().getContentPane()); 
@@ -216,7 +231,10 @@ public class TrangchuUI extends javax.swing.JFrame {
     }//GEN-LAST:event_MEMUDNActionPerformed
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
-         internal1.setContentPane(new tc().getContentPane());       // TODO add your handling code here:
+        tc t = new tc();
+        t.ten = ten;
+        internal1.setContentPane(t.getContentPane());
+        t.xuly();
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void MENUDKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MENUDKActionPerformed
@@ -226,13 +244,38 @@ public class TrangchuUI extends javax.swing.JFrame {
         }
         else
         {
-         if(role.equals("nv"))    
+         if(role.equals("ql"))    
         internal1.setContentPane(new DK_UI().getContentPane());
         else
               JOptionPane.showMessageDialog(null, "Chức vu bạn không thể đăng kí");// TODO add your handling code here:
         }
        
     }//GEN-LAST:event_MENUDKActionPerformed
+
+    private void jl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl1MouseClicked
+        internal1.setContentPane(new TK_USERUI().getContentPane());
+    }//GEN-LAST:event_jl1MouseClicked
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+       if(dn==1)
+       {
+       Setting set = new Setting();
+       set.user = user;
+       set.get();
+       internal1.setContentPane(set.getContentPane());
+       }
+       else
+           JOptionPane.showMessageDialog(null, "Bạn chưa đăng nhập");
+    }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        if(role.equals("ql"))  
+        {
+        QLTKUI QL = new QLTKUI();
+        QL.maNV = user.getMaNV();
+        internal1.setContentPane(new QLTKUI().getContentPane());   
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,7 +319,6 @@ public class TrangchuUI extends javax.swing.JFrame {
     private javax.swing.JInternalFrame internal1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -286,5 +328,7 @@ public class TrangchuUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JLabel jl1;
     // End of variables declaration//GEN-END:variables
 }
